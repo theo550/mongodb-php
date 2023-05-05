@@ -1,0 +1,22 @@
+version: '3.9'
+services:
+  mongodb:
+    image: mongo:latest
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo_creative_data:/data/db
+      - ./sample_data:/sample_data
+  redis:
+    image: redis:alpine
+    ports:
+      - '6379:6379'
+    networks:
+      - appnet
+volumes:
+  mongo_creative_data:
+    driver: "local"
+
+networks:
+  appnet:
+    driver: "bridge"
